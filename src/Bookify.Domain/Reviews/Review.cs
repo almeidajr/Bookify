@@ -1,6 +1,5 @@
 ﻿using Bookify.Domain.Abstractions;
 using Bookify.Domain.Bookings;
-using System.Xml.Linq;
 using Bookify.Domain.Reviews.Events;
 
 namespace Bookify.Domain.Reviews;
@@ -9,7 +8,7 @@ public sealed class Review : Entity
 {
     private Review(
         Guid id,
-    Guid apartmentId,
+        Guid apartmentId,
         Guid bookingId,
         Guid userId,
         Rating rating,
