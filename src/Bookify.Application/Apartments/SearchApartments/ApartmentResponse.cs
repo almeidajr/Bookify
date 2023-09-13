@@ -5,5 +5,7 @@ public sealed record ApartmentResponse(
     string Name,
     string Description,
     decimal Price,
-    string Currency,
-    AddressResponse Address);
+    string Currency)
+{
+    public required AddressResponse Address { get; init; }
+}

@@ -9,11 +9,11 @@ namespace Bookify.Application.Apartments.SearchApartments;
 internal sealed class SearchApartmentsQueryHandler
     : IQueryHandler<SearchApartmentsQuery, IReadOnlyList<ApartmentResponse>>
 {
-    private static readonly BookingStatus[] ActiveBookingStatuses =
+    private static readonly int[] ActiveBookingStatuses =
     {
-        BookingStatus.Reserved,
-        BookingStatus.Confirmed,
-        BookingStatus.Completed
+        (int)BookingStatus.Reserved,
+        (int)BookingStatus.Confirmed,
+        (int)BookingStatus.Completed
     };
 
     private static readonly List<ApartmentResponse> EmptyResponse = new();
