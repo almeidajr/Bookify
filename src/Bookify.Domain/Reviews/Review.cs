@@ -1,4 +1,5 @@
-﻿using Bookify.Domain.Abstractions;
+﻿using System.Diagnostics.CodeAnalysis;
+using Bookify.Domain.Abstractions;
 using Bookify.Domain.Bookings;
 using Bookify.Domain.Reviews.Events;
 
@@ -13,8 +14,7 @@ public sealed class Review : Entity
         Guid userId,
         Rating rating,
         Comment comment,
-        DateTime createdOnUtc)
-        : base(id)
+        DateTime createdOnUtc) : base(id)
     {
         ApartmentId = apartmentId;
         BookingId = bookingId;
@@ -23,6 +23,16 @@ public sealed class Review : Entity
         Comment = comment;
         CreatedOnUtc = createdOnUtc;
     }
+
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+    [SuppressMessage(
+        "CodeQuality",
+        "IDE0051:Remove unused private members",
+        Justification = "Used by EntityFrameworkCore")]
+    private Review(Guid id) : base(id)
+    {
+    }
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
     public Guid ApartmentId { get; private set; }
 

@@ -1,4 +1,5 @@
-﻿using Bookify.Domain.Abstractions;
+﻿using System.Diagnostics.CodeAnalysis;
+using Bookify.Domain.Abstractions;
 using Bookify.Domain.Apartments;
 using Bookify.Domain.Bookings.Events;
 using Bookify.Domain.Shared;
@@ -31,11 +32,21 @@ public sealed class Booking : Entity
         CreatedOnUtc = createdOnUtc;
     }
 
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+    [SuppressMessage(
+        "CodeQuality",
+        "IDE0051:Remove unused private members",
+        Justification = "Used by EntityFrameworkCore")]
+    private Booking(Guid id) : base(id)
+    {
+    }
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+
     public Guid ApartmentId { get; private set; }
 
     public Guid UserId { get; private set; }
 
-    public DateRange Duration { get; private set; }
+    public DateRange Duration { get; }
 
     public Money PriceForPeriod { get; private set; }
 
