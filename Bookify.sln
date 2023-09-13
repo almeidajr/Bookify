@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookify.Domain", "src\Booki
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookify.Application", "src\Bookify.Application\Bookify.Application.csproj", "{BBCCD77B-2F7C-443B-B398-E35F070B34C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookify.Infrastructure", "src\Bookify.Infrastructure\Bookify.Infrastructure.csproj", "{565C59AD-9312-4DBD-B6F6-ABC88DC0E49C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookify.Infrastructure", "src\Bookify.Infrastructure\Bookify.Infrastructure.csproj", "{565C59AD-9312-4DBD-B6F6-ABC88DC0E49C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookify.Api", "src\Bookify.Api\Bookify.Api.csproj", "{E3B09C0A-2774-4600-A84E-2EA923EEE6BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookify.Api", "src\Bookify.Api\Bookify.Api.csproj", "{E3B09C0A-2774-4600-A84E-2EA923EEE6BD}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{C3B08FF2-D349-473D-A7C7-47E5578FFB98}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{E3B09C0A-2774-4600-A84E-2EA923EEE6BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3B09C0A-2774-4600-A84E-2EA923EEE6BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E3B09C0A-2774-4600-A84E-2EA923EEE6BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3B08FF2-D349-473D-A7C7-47E5578FFB98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3B08FF2-D349-473D-A7C7-47E5578FFB98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3B08FF2-D349-473D-A7C7-47E5578FFB98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3B08FF2-D349-473D-A7C7-47E5578FFB98}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
