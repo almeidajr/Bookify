@@ -28,6 +28,7 @@ public sealed class User : Entity
     public LastName LastName { get; private set; }
 
     public Email Email { get; private set; }
+    public string IdentityId { get; set; } = string.Empty;
 
     public static User Create(FirstName firstName, LastName lastName, Email email)
     {
