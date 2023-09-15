@@ -1,4 +1,5 @@
-﻿using Bookify.Application.Users.RegisterUser;
+﻿using Bookify.Application.Users.LogInUser;
+using Bookify.Application.Users.RegisterUser;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -34,5 +35,20 @@ public class UsersController : ControllerBase
         return result.IsSuccess
             ? Ok(result.Value)
             : BadRequest(result.Error);
+    }
+
+    [AllowAnonymous]
+    [HttpPost("login")]
+    public async Task<IActionResult> LogIn(
+        LogInUserRequest request,
+        CancellationToken cancellationToken)
+    {
+        var command = new LogInUserCommand(request.Email, request.Password);
+
+        var result = await _sender.Send(command, cancellationToken);
+
+        return result.IsSuccess
+            ? Ok(result.Value)
+            : Unauthorized(result.Error);
     }
 }

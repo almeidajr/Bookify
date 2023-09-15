@@ -70,6 +70,12 @@ public static class InfrastructureServiceCollectionExtensions
             })
             .AddHttpMessageHandler<AdminAuthorizationDelegatingHandler>();
 
+        services.AddHttpClient<IJwtService, JwtService>((serviceProvider, httpClient) =>
+        {
+            var keycloakOptions = serviceProvider.GetRequiredService<IOptions<KeycloakOptions>>().Value;
+            httpClient.BaseAddress = keycloakOptions.TokenUrl;
+        });
+
         return services;
     }
 }
