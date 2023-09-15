@@ -1,10 +1,11 @@
 ﻿namespace Bookify.Infrastructure.Authentication;
 
-public sealed record AuthenticationOptions(
-    string Audience,
-    string MetadataUrl,
-    bool RequireHttpsMetadata,
-    string Issuer)
+public sealed class AuthenticationOptions
 {
-    public const string Section = nameof(Authentication);
+    public const string Section = "Authentication";
+
+    public required string Audience { get; init; }
+    public required string MetadataUrl { get; init; }
+    public required string ValidIssuer { get; init; }
+    public required bool RequireHttpsMetadata { get; init; }
 }

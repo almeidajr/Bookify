@@ -7,7 +7,7 @@ namespace Bookify.Api.Controllers.Users;
 
 [ApiController]
 [Authorize]
-[Route("[controller]")]
+[Route("users")]
 public class UsersController : ControllerBase
 {
     private readonly ISender _sender;
