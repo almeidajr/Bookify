@@ -4,10 +4,10 @@ using Bookify.Domain.Shared;
 
 namespace Bookify.Domain.Apartments;
 
-public sealed class Apartment : Entity
+public sealed class Apartment : Entity<ApartmentId>
 {
     public Apartment(
-        Guid id,
+        ApartmentId id,
         Name name,
         Description description,
         Address address,
@@ -28,7 +28,7 @@ public sealed class Apartment : Entity
         "CodeQuality",
         "IDE0051:Remove unused private members",
         Justification = "Used by EntityFrameworkCore")]
-    private Apartment(Guid id) : base(id)
+    private Apartment(ApartmentId id) : base(id)
     {
     }
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.

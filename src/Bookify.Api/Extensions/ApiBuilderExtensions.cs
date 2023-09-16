@@ -8,26 +8,28 @@ namespace Bookify.Api.Extensions;
 
 public static class ApiBuilderExtensions
 {
-    public static async Task ApplyMigrationsAsync(this IApplicationBuilder app)
+    public static async Task ApplyMigrationsAsync(
+        this IApplicationBuilder app,
+        CancellationToken cancellationToken = default)
     {
-        using var scope = app.ApplicationServices.CreateScope();
+        await using var scope = app.ApplicationServices.CreateAsyncScope();
         await using var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-        await dbContext.Database.MigrateAsync();
+        await dbContext.Database.MigrateAsync(cancellationToken);
     }
 
-    public static async Task SeedDataAsync(this IApplicationBuilder app)
+    public static async Task SeedDataAsync(this IApplicationBuilder app, CancellationToken cancellationToken = default)
     {
-        using var scope = app.ApplicationServices.CreateScope();
-        var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        await using var scope = app.ApplicationServices.CreateAsyncScope();
+        await using var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
         var faker = new Faker();
 
-        if (!await dbContext.Set<Apartment>().AnyAsync())
+        if (!await dbContext.Set<Apartment>().AnyAsync(cancellationToken))
         {
             var amenities = Enum.GetValues<Amenity>();
 
             var apartments = Enumerable.Range(0, 100)
                 .Select(_ => new Apartment(
-                    Guid.NewGuid(),
+                    ApartmentId.New(),
                     new Name(faker.Company.CompanyName()),
                     new Description(faker.Company.CatchPhrase()),
                     new Address(
@@ -42,6 +44,6 @@ public static class ApiBuilderExtensions
             dbContext.AddRange(apartments);
         }
 
-        await dbContext.SaveChangesAsync();
+        await dbContext.SaveChangesAsync(cancellationToken);
     }
 }
