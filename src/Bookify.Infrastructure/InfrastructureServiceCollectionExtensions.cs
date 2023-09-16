@@ -11,6 +11,7 @@ using Bookify.Infrastructure.Authentication;
 using Bookify.Infrastructure.Clock;
 using Bookify.Infrastructure.Data;
 using Bookify.Infrastructure.Email;
+using Bookify.Infrastructure.Outbox;
 using Bookify.Infrastructure.Repositories;
 using Dapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -29,7 +30,8 @@ public static class InfrastructureServiceCollectionExtensions
             .AddSingleton<IDateTimeProvider, DateTimeProvider>()
             .AddSingleton<IEmailService, EmailService>()
             .AddPersistence(configuration)
-            .Authentication(configuration);
+            .AddAuthentication(configuration)
+            .AddBackgroundServices();
     }
 
     private static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
@@ -52,11 +54,12 @@ public static class InfrastructureServiceCollectionExtensions
             .AddScoped<IReviewRepository, ReviewRepository>();
     }
 
-    private static IServiceCollection Authentication(this IServiceCollection services, IConfiguration configuration)
+    private static IServiceCollection AddAuthentication(this IServiceCollection services, IConfiguration configuration)
     {
         services
             .Configure<AuthenticationOptions>(configuration.GetSection(AuthenticationOptions.Section))
             .Configure<KeycloakOptions>(configuration.GetSection(KeycloakOptions.Section))
+            .Configure<OutboxOptions>(configuration.GetSection(OutboxOptions.Section))
             .ConfigureOptions<JwtBearerOptionsSetup>()
             .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer();
@@ -77,5 +80,10 @@ public static class InfrastructureServiceCollectionExtensions
         });
 
         return services;
+    }
+
+    private static IServiceCollection AddBackgroundServices(this IServiceCollection services)
+    {
+        return services.AddHostedService<ProcessOutboxMessagesBackgroundService>();
     }
 }

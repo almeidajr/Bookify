@@ -50,6 +50,6 @@ public sealed class AdminAuthorizationDelegatingHandler : DelegatingHandler
         var authorizationToken = await authorizationResponse.Content
             .ReadFromJsonAsync<AuthorizationToken>(cancellationToken: cancellationToken);
         return authorizationToken ??
-               throw new InvalidOperationException("Failed to deserialize the response into an AuthorizationToken.");
+               throw new InvalidOperationException("Failed to deserialize the response into an authorization token.");
     }
 }
