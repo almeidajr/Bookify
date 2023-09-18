@@ -33,7 +33,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\src\Bookify.Infrastructure\Bookify.Infrastructure.csproj" />
+		<ProjectReference Include="..\..\src\Bookify.Infrastructure\Bookify.Infrastructure.csproj" />
 	</ItemGroup>
 
 </Project>
